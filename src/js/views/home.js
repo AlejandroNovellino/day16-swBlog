@@ -3,7 +3,7 @@ import { CardGroup, Container, Row } from "react-bootstrap";
 import "../../styles/home.scss";
 
 // Components imports
-import { MyCardChar } from "../component/MyCardChar";
+import { MyCard } from "../component/MyCard";
 
 // Importing the Context
 import { Context } from "../store/appContext";
@@ -15,11 +15,15 @@ export const Home = () => {
 	return (
 		<Container fluid>
 			{/* Characters row*/}
+			<Row>
+				<h2>CHARACTERS</h2>
+			</Row>
 			<Row className="">
 				{store.characters.map(char => {
 					return (
-						<MyCardChar
-							key={char.uid}
+						<MyCard
+							key={"C" + char.uid}
+							id={"C" + char.uid}
 							name={char.properties.name}
 							gender={char.properties.gender}
 							hair_color={char.properties.hair_color}
@@ -29,7 +33,22 @@ export const Home = () => {
 				})}
 			</Row>
 			{/* Planets row*/}
-			<Row />
+			<Row>
+				<h2>PLANETS</h2>
+			</Row>
+			<Row>
+				{store.planets.map(planet => {
+					return (
+						<MyCard
+							key={"P" + planet.uid}
+							id={"P" + planet.uid}
+							name={planet.properties.name}
+							population={planet.properties.population}
+							terrain={planet.properties.terrain}
+						/>
+					);
+				})}
+			</Row>
 		</Container>
 	);
 };
