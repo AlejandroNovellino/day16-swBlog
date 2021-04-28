@@ -41,7 +41,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			fetchElements: async (toFind, elements) => {
-				console.log(`🚀 ~ file: flux.js ~ line 44 ~ fetchElements: ~ toFind`, toFind);
 				// Fetch each element of the pages
 
 				// Get the store

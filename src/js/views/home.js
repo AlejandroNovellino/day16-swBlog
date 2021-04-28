@@ -28,13 +28,7 @@ export const Home = () => {
 									return (
 										<Col xs={4} key={"C" + element.uid}>
 											<MyCard
-												id={
-													e == "people"
-														? "C" + element.uid
-														: e == "planets"
-															? "T" + element.uid
-															: "S" + element.uid
-												}
+												type={e}
 												name={element.properties.name}
 												gender={e == "people" ? element.properties.gender : null}
 												hair_color={e == "people" ? element.properties.hair_color : null}
