@@ -26,8 +26,9 @@ export const Home = () => {
 							<Row className="flex-nowrap overflow-auto">
 								{store[e].map(element => {
 									return (
-										<Col xs={4} key={"C" + element.uid}>
+										<Col xs={4} key={e + element.uid}>
 											<MyCard
+												id={element.uid}
 												type={e}
 												name={element.properties.name}
 												gender={e == "people" ? element.properties.gender : null}

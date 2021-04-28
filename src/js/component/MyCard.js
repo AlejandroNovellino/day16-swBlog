@@ -3,14 +3,15 @@ import PropTypes from "prop-types";
 
 // Importing the image
 import swLogo from "../../img/swImage.jpg";
-
 // Importing the react-bootstrap components
 import { Container, Row, Button, Card, Col } from "react-bootstrap";
-
 // Importing the Context
 import { Context } from "../store/appContext";
+//Importing Link from React Router
+import { Link } from "react-router-dom";
 
 export const MyCard = ({
+	id,
 	type,
 	name,
 	gender,
@@ -49,10 +50,12 @@ export const MyCard = ({
 					{type == "people" && <Row>{"Eye Color: " + eye_color}</Row>}
 					<Row className="justify-content-between mt-3">
 						<Col xs={6} className="p-0">
-							<Button variant="outline-primary">Learn More</Button>
+							<Link to={`/${type}/${id}`}>
+								<Button variant="outline-primary">Learn More</Button>
+							</Link>
 						</Col>
 						<Col xs={2} className="p-0">
-							<Button variant="outline-warning">
+							<Button variant="outline-warning" onClick={actions.addToFavorites}>
 								<i className="far fa-heart" />
 							</Button>
 						</Col>
@@ -64,6 +67,7 @@ export const MyCard = ({
 };
 
 MyCard.propTypes = {
+	id: PropTypes.string,
 	type: PropTypes.string,
 	name: PropTypes.string,
 	gender: PropTypes.string,

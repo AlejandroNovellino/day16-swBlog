@@ -5,7 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			people: [],
 			planets: [],
 			starships: [],
-			favorites: []
+			favorites: {}
 		},
 		actions: {
 			// Use getActions to call a function within a function
@@ -65,6 +65,64 @@ const getState = ({ getStore, getActions, setStore }) => {
 				auxObj[toFind] = [...store[toFind], ...auxList];
 				setStore(auxObj);
 			},
+			getArrayOfPropForType: type => {
+				// Return the array of properties fot the type
+
+				// Properties wanted for the type "people"
+				const arrPropForPeople = [
+					["name", "Name"],
+					["birth_year", "Birth Year"],
+					["gender", "Gender"],
+					["height", "Height"],
+					["skin_color", "Skin Color"],
+					["eye_color", "Eye Color"]
+				];
+				// Properties wanted for the type "planets"
+				const arrPropForPlanets = [
+					["name", "Name"],
+					["climate", "Climate"],
+					["population", "Population"],
+					["orbital_period", "Orbital Period"],
+					["rotation_period", "Rotation Period"],
+					["diameter", "Diameter"]
+				];
+				// Properties wanted for the type "starships"
+				const arrPropForStarships = [
+					["name", "Name"],
+					["model", "Model"],
+					["starship_class", "Starship Class"],
+					["crew", "Crew"],
+					["passengers", "Passengers"],
+					["length", "Length"]
+				];
+				// Return the asked array
+				if (type == "people") {
+					return arrPropForPeople;
+				} else if (type == "planets") {
+					return arrPropForPlanets;
+				} else if (type == "starships") {
+					return arrPropForStarships;
+				}
+			},
+			getElementById: (type, uid) => {
+				// It returns the element with the given uid and only 6 properties to display
+
+				// Get the arrays of the types
+				const arrayToSearch = getStore()[type];
+				// Find the element of the wanted type by its "uid"
+				const found = arrayToSearch.filter(element => {
+					return element.uid == uid;
+				})[0];
+				// Get the props for each type of element
+				const arrOfProps = getActions().getArrayOfPropForType(type);
+				// Get the properties of the requested element
+				const arrToReturn = arrOfProps.map(element => {
+					return [element[1], found.properties[element[0]]];
+				});
+
+				return arrToReturn;
+			},
+
 			addToFavorites: element => {
 				const store = getStore();
 
