@@ -3,7 +3,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			baseUrl: "https://www.swapi.tech/api/",
 			characters: [],
-			planets: []
+			planets: [],
+			starships: [],
+			favorites: []
 		},
 		actions: {
 			// Use getActions to call a function within a function
@@ -66,12 +68,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({
 						planets: [...store.planets, ...auxList]
 					});
+				} else if (toFind == "starships/") {
+					setStore({
+						starships: [...store.starships, ...auxList]
+					});
 				}
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+			addToFavorites: element => {
+				const store = getStore();
+
+				setStore({
+					favorites: [...store.favorites, element]
+				});
 			},
 			changeColor: (index, color) => {
 				//get the store

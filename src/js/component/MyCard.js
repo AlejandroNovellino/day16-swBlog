@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 
+// Importing the image
 import swLogo from "../../img/swImage.jpg";
 
+// Importing the react-bootstrap components
 import { Container, Row, Button, Card, Col } from "react-bootstrap";
 
+// Importing the Context
+import { Context } from "../store/appContext";
+
 export const MyCard = ({ id, name, gender, hair_color, eye_color, population, terrain }) => {
+	// Using the context
+	const { store, actions } = useContext(Context);
+
 	return (
 		<Card style={{ width: "20rem" }}>
 			<Card.Img variant="top" src={swLogo} />
@@ -19,10 +27,10 @@ export const MyCard = ({ id, name, gender, hair_color, eye_color, population, te
 					{id[0] == "C" && <Row>{"Eye Color: " + eye_color}</Row>}
 					<Row className="justify-content-between mt-3">
 						<Col xs={6} className="p-0">
-							<Button variant="primary">Learn More</Button>
+							<Button variant="outline-primary">Learn More</Button>
 						</Col>
 						<Col xs={2} className="p-0">
-							<Button variant="primary">
+							<Button variant="outline-warning">
 								<i className="far fa-heart" />
 							</Button>
 						</Col>

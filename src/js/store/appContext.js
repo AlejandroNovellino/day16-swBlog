@@ -34,6 +34,7 @@ const injectContext = PassedComponent => {
 				 **/
 				state.actions.fetchPages("people/");
 				state.actions.fetchPages("planets/");
+				state.actions.fetchPages("starships/");
 			},
 			[state.actions.fetchPages]
 		);
