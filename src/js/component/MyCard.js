@@ -10,7 +10,17 @@ import { Container, Row, Button, Card, Col } from "react-bootstrap";
 // Importing the Context
 import { Context } from "../store/appContext";
 
-export const MyCard = ({ id, name, gender, hair_color, eye_color, population, terrain }) => {
+export const MyCard = ({
+	id,
+	name,
+	gender,
+	hair_color,
+	eye_color,
+	population,
+	terrain,
+	starship_class,
+	passengers
+}) => {
 	// Using the context
 	const { store, actions } = useContext(Context);
 
@@ -22,9 +32,21 @@ export const MyCard = ({ id, name, gender, hair_color, eye_color, population, te
 					<Row>
 						<Card.Title>{name}</Card.Title>
 					</Row>
-					<Row>{id[0] == "C" ? `Gender : ${gender}` : `Population: ${population}`}</Row>
-					<Row>{id[0] == "C" ? `Hair Color: ${hair_color}` : `Terrain: ${terrain}`}</Row>
-					{id[0] == "C" && <Row>{"Eye Color: " + eye_color}</Row>}
+					<Row>
+						{id[0] == "P"
+							? `Gender : ${gender}`
+							: id[0] == "T"
+								? `Population: ${population}`
+								: `Starship Class: ${starship_class}`}
+					</Row>
+					<Row>
+						{id[0] == "P"
+							? `Hair Color: ${hair_color}`
+							: id[0] == "T"
+								? `Terrain: ${terrain}`
+								: `Passengers: ${passengers}`}
+					</Row>
+					{id[0] == "P" && <Row>{"Eye Color: " + eye_color}</Row>}
 					<Row className="justify-content-between mt-3">
 						<Col xs={6} className="p-0">
 							<Button variant="outline-primary">Learn More</Button>
@@ -48,5 +70,7 @@ MyCard.propTypes = {
 	hair_color: PropTypes.string,
 	eye_color: PropTypes.string,
 	population: PropTypes.string,
-	terrain: PropTypes.string
+	terrain: PropTypes.string,
+	starship_class: PropTypes.string,
+	passengers: PropTypes.number
 };

@@ -15,8 +15,8 @@
 		"semi": ["error", "always"],
 		"allowImportExportEverywhere": false,
 		"indent": "off",
-		"react/jsx-indent": "off",
-		"react/jsx-indent-props": "off",
+		//"react/jsx-indent": "off",
+		//"react/jsx-indent-props": "off",
 		"react/prop-types": [2]
 	}
 }

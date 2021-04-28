@@ -14,67 +14,46 @@ export const Home = () => {
 
 	return (
 		<Container fluid>
-			{/* Characters row*/}
-			<Container className="mt-3 mb-4">
-				<Row className="px-3">
-					<h2>CHARACTERS</h2>
-				</Row>
-			</Container>
-			<Container className="horizontal-scrollable">
-				<Row className="flex-nowrap overflow-auto">
-					{store.characters.map(char => {
-						return (
-							<Col xs={4} key={"C" + char.uid}>
-								<MyCard
-									id={"C" + char.uid}
-									name={char.properties.name}
-									gender={char.properties.gender}
-									hair_color={char.properties.hair_color}
-									eye_color={char.properties.eye_color}
-								/>
-							</Col>
-						);
-					})}
-				</Row>
-			</Container>
-			{/* Planets row*/}
-			<Container className="mt-4 mb-4">
-				<Row className="px-3">
-					<h2>PLANETS</h2>
-				</Row>
-			</Container>
-			<Container className="horizontal-scrollable">
-				<Row className="flex-nowrap overflow-auto">
-					{store.planets.map(planet => {
-						return (
-							<Col xs={4} key={"C" + planet.uid}>
-								<MyCard
-									id={"P" + planet.uid}
-									name={planet.properties.name}
-									population={planet.properties.population}
-									terrain={planet.properties.terrain}
-								/>
-							</Col>
-						);
-					})}
-				</Row>
-			</Container>
-			<Container className="mt-4 mb-4">
-				<Row className="px-3">
-					<h2>STARSHIPS</h2>
-				</Row>
-			</Container>
-			<Container className="horizontal-scrollable">
-				<Row className="flex-nowrap overflow-auto">
-					{store.starships.map(ship => {
-						return (
-							<Col xs={4} key={"C" + ship.uid}>
-								<MyCard id={"S" + ship.uid} name={ship.properties.name} />
-							</Col>
-						);
-					})}
-				</Row>
-			</Container>
+			{["people", "planets", "starships"].map(e => {
+				return (
+					<Container fluid key={e}>
+						<Container className="mt-4 mb-4">
+							<Row className="px-3">
+								<h2>{e == "people" ? "CHARACTERS" : e == "planets" ? "PLANETS" : "STARSHIPS"}</h2>
+							</Row>
+						</Container>
+						<Container className="horizontal-scrollable">
+							<Row className="flex-nowrap overflow-auto">
+								{store[e].map(element => {
+									return (
+										<Col xs={4} key={"C" + element.uid}>
+											<MyCard
+												id={
+													e == "people"
+														? "C" + element.uid
+														: e == "planets"
+															? "T" + element.uid
+															: "S" + element.uid
+												}
+												name={element.properties.name}
+												gender={e == "people" ? element.properties.gender : null}
+												hair_color={e == "people" ? element.properties.hair_color : null}
+												eye_color={e == "people" ? element.properties.eye_color : null}
+												population={e == "planets" ? element.properties.population : null}
+												terrain={e == "planets" ? element.properties.terrain : null}
+												starship_class={
+													e == "starships" ? element.properties.starship_class : null
+												}
+												passengers={e == "starships" ? element.properties.passengers : null}
+											/>
+										</Col>
+									);
+								})}
+							</Row>
+						</Container>
+					</Container>
+				);
+			})}
 		</Container>
 	);
 };

@@ -32,9 +32,9 @@ const injectContext = PassedComponent => {
 				 * state.actions.loadSomeData(); <---- calling this function from the flux.js actions
 				 *
 				 **/
-				state.actions.fetchPages("people/");
-				state.actions.fetchPages("planets/");
-				state.actions.fetchPages("starships/");
+				for (const element of ["people", "planets", "starships"]) {
+					state.actions.fetchPages(element);
+				}
 			},
 			[state.actions.fetchPages]
 		);
