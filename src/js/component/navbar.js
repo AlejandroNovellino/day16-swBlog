@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
-import { Container } from "react-bootstrap";
-
+// Importing the stylesheet
+import "../../styles/views/_navBar.scss";
+// Importing the image
 import swLogo from "../../img/swLogo.png";
+// Importing the react-bootstrap components
+import { Container, Row, Button, Col, Dropdown, DropdownButton, ButtonGroup } from "react-bootstrap";
+// Importing the Context
+import { Context } from "../store/appContext";
 
 export const Navbar = () => {
+	// Using the context
+	const { store, actions } = useContext(Context);
+
+	const handleDelete = e => {
+		console.log(`🚀 ~ file: navbar.js ~ line 20 ~ handleDelete ~ e`, e);
+	};
+
 	return (
 		<nav className="navbar navbar-light bg-light mb-3">
 			<Container>
@@ -15,9 +27,30 @@ export const Navbar = () => {
 					</span>
 				</Link>
 				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
-					</Link>
+					<DropdownButton menuAlign="right" title={`Favorites ${store.favorites.length}`}>
+						{store.favorites.map((element, index) => {
+							return (
+								<div className="dropdown-item" key={index}>
+									<Container fluid>
+										<Row>
+											<Col xs={12}>
+												<ButtonGroup>
+													<Link to={`/${element[0]}/${element[1]}`}>
+														<Button className="d-block" variant="primary">
+															{element[2]}
+														</Button>
+													</Link>
+													<Button className="d-block" variant="danger" onClick={handleDelete}>
+														<i className="fas fa-trash" />
+													</Button>
+												</ButtonGroup>
+											</Col>
+										</Row>
+									</Container>
+								</div>
+							);
+						})}
+					</DropdownButton>
 				</div>
 			</Container>
 		</nav>

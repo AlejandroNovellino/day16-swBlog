@@ -5,7 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			people: [],
 			planets: [],
 			starships: [],
-			favorites: {}
+			favorites: []
 		},
 		actions: {
 			// Use getActions to call a function within a function
@@ -122,12 +122,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				return arrToReturn;
 			},
+			favoritesContains: (type, id) => {
+				// Return true if the element exist
 
-			addToFavorites: element => {
+				const includes = element => {
+					return element[0] == type && element[1] == id;
+				};
+
+				return getStore().favorites.some(includes);
+			},
+			addToFavorites: (type, id, name) => {
+				// Add the element to the favorites list
+
 				const store = getStore();
+				const newFavorite = [type, id, name];
+				// If the element already exist on the list, skip
+				if (getActions().favoritesContains(type, id)) return null;
 
 				setStore({
-					favorites: [...store.favorites, element]
+					favorites: [...store.favorites, newFavorite]
+				});
+			},
+			deleteFromFavorites: (type, id) => {
+				// Delete the element from the favorites list
+
+				const store = getStore();
+				const auxFavorites = store.filter(element => {
+					return !(element[0] == type && element[1] == id);
 				});
 			}
 		}

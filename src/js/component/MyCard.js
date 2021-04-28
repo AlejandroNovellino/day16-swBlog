@@ -55,8 +55,16 @@ export const MyCard = ({
 							</Link>
 						</Col>
 						<Col xs={2} className="p-0">
-							<Button variant="outline-warning" onClick={actions.addToFavorites}>
-								<i className="far fa-heart" />
+							<Button
+								variant="outline-warning"
+								onClick={e => {
+									actions.addToFavorites(type, id, name);
+								}}>
+								{actions.favoritesContains(type, id) ? (
+									<i className="fas fa-heart" />
+								) : (
+									<i className="far fa-heart" />
+								)}
 							</Button>
 						</Col>
 					</Row>
