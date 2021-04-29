@@ -15,7 +15,8 @@ export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 
 	const handleDelete = e => {
-		console.log(`🚀 ~ file: navbar.js ~ line 20 ~ handleDelete ~ e`, e);
+		// Delete the element from  the favorites list
+		actions.deleteFromFavorites(e.target.id);
 	};
 
 	return (
@@ -40,8 +41,15 @@ export const Navbar = () => {
 															{element[2]}
 														</Button>
 													</Link>
-													<Button className="d-block" variant="danger" onClick={handleDelete}>
-														<i className="fas fa-trash" />
+													<Button
+														className="d-block"
+														variant="danger"
+														id={`${element[0]}-${element[1]}`}
+														onClick={handleDelete}>
+														<i
+															className="fas fa-trash"
+															id={`${element[0]}-${element[1]}`}
+														/>
 													</Button>
 												</ButtonGroup>
 											</Col>

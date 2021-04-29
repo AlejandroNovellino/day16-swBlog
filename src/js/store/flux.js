@@ -37,7 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					}
 				} catch (error) {
-					console.log(`🚀 ~ file: flux.js ~ line 37 ~ fetchPages: ~ error`, error);
+					console.log(`🚀 ~ file: flux.js ~ line 40 ~ fetchPages: ~ error`, error);
 				}
 			},
 			fetchElements: async (toFind, elements) => {
@@ -56,7 +56,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						// Push the new element
 						if (response.ok) auxList.push(body.result);
 					} catch (error) {
-						console.log(`🚀 ~ file: flux.js ~ line 44 ~ fetchElements: ~ error`, error);
+						console.log(`🚀 ~ file: flux.js ~ line 59 ~ fetchElements: ~ error`, error);
 					}
 				}
 
@@ -143,12 +143,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 					favorites: [...store.favorites, newFavorite]
 				});
 			},
-			deleteFromFavorites: (type, id) => {
+			deleteFromFavorites: id => {
 				// Delete the element from the favorites list
 
 				const store = getStore();
-				const auxFavorites = store.filter(element => {
-					return !(element[0] == type && element[1] == id);
+				const auxFavorites = store.favorites.filter(element => {
+					let aux = `${element[0]}-${element[1]}`;
+					return id != aux;
+				});
+
+				setStore({
+					favorites: auxFavorites
 				});
 			}
 		}

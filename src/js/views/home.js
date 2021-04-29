@@ -19,7 +19,9 @@ export const Home = () => {
 					<Container fluid key={e}>
 						<Container className="mt-4 mb-4">
 							<Row className="px-3">
-								<h2>{e == "people" ? "CHARACTERS" : e == "planets" ? "PLANETS" : "STARSHIPS"}</h2>
+								<h2 className="text-danger">
+									{e == "people" ? "CHARACTERS" : e == "planets" ? "PLANETS" : "STARSHIPS"}
+								</h2>
 							</Row>
 						</Container>
 						<Container className="horizontal-scrollable">
